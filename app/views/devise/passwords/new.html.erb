@@ -1,0 +1,19 @@
+
+<div class="row justify-content-center" style="text-align: center">
+  <%= form_for(resource,:html => {:class=>'col-md-8 col-sm-8'}, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+  <%= sign_up_error_messages! %>
+
+  <div class="form-group">
+    <%= f.label "邮箱" %><br />
+    <%= f.email_field :email, autofocus: true %>
+  </div>
+
+  <div class="actions form-group">
+    <%= f.submit "发送确认邮件" %>
+  </div>
+<% end %>
+</div>
+
+<div class="row justify-content-center" style="text-align: center">
+  <%= link_to "没有收到邮件?", new_confirmation_path(resource_name) %><br />
+</div>

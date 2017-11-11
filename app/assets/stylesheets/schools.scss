@@ -1,0 +1,31 @@
+.card-text{
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+
+.card{
+  margin-bottom: 30px;
+}
+
+.space-name{
+  margin: 10px;
+  span{
+    font-weight: bold;
+    margin-left: 5px;
+  }
+}
+
+.row{
+  margin-top: 50px;
+}
+
+#google_map {
+  height: 400px;
+}
+
+school-image{
+  width: 300px;
+  height: 400px;
+}

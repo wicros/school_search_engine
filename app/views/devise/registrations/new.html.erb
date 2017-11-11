@@ -1,0 +1,33 @@
+<div class="row justify-content-center" style="text-align: center">
+<%= form_for(resource,:html => {:class=>'col-md-4 col-sm-8'}, as: resource_name, url: registration_path(resource_name)) do |f| %>
+  <%= sign_up_error_messages! %>
+
+  <div class="form-group">
+    <%= f.label "邮箱"%><br />
+    <%= f.email_field :email, autofocus: true%>
+  </div>
+
+  <div class="form-group">
+    <%= f.label "密码" %><br />
+    <%= f.password_field :password, autocomplete: "off" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label "确认密码" %><br />
+    <%= f.password_field :password_confirmation, autocomplete: "off" %>
+  </div>
+
+  <div class="form-group row justify-content-center">
+    <div class="color-red"><%=flash[:recaptcha_error]%></div>
+    <%= recaptcha_tags %>
+  </div>
+
+  <div class="form-group">
+    <%= f.submit "注册"%>
+  </div>
+<% end %>
+</div>
+
+
+
+<!--<em>(最小<%= @minimum_password_length %>位数)</em>-->

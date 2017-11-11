@@ -1,0 +1,2 @@
+class JptLevel < ApplicationRecord
+end

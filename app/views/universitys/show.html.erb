@@ -1,0 +1,53 @@
+<div class="container">
+  <div class="bd-callout bd-callout-blue">
+    <h4 style="margin: 30px;text-align: center" class="color-blue"><%= @university_list[0].name%></h4>
+    <div class="row">
+      <table class="table table-bordered">
+        <tr>
+        <th style="text-align: center">学部名</th>
+        <th style="text-align: center">学部全名</th>
+        <th style="text-align: center">详细资料</th>
+        </tr>
+        <% @university_list.each do |item|%>
+            <tr>
+              <td style="text-align: center"><%= item.department%></td>
+              <td style="text-align: center"><%= item.total_name%></td>
+              <td style="text-align: center"><button class="btn btn-primary btn-uni-show" data="<%= item.to_json%>">显示</button></td>
+            </tr>
+        <% end%>
+      </table>
+    </div>
+  </div>
+
+  <div class="bd-callout bd-callout-orange" id="detial_div">
+    <h4 style="margin: 30px;text-align: center;" class="color-orange" id="detail_title"></h4>
+    <div class="row">
+      <div style="width: 50%;padding: 50px;font-size: x-large;padding-left: 100px">
+        <div style="margin: 50px">
+          <span class="color-yellow">平均分: </span><span id="average_span" style="margin-left: 50px"></span>
+        </div>
+        <div style="margin: 50px">
+          <span class="color-yellow">中位分: </span><span id="median_span" style="margin-left: 50px"></span>
+        </div>
+        <div style="margin: 50px">
+          <span class="color-yellow">最高分: </span><span id="highest_span" style="margin-left: 50px"></span>
+        </div>
+        <div style="margin: 50px">
+          <span class="color-yellow">最低分: </span><span id="lowest_span" style="margin-left: 50px"></span>
+        </div>
+      </div>
+      <div style="float: right;width: 50%;padding: 50px">
+        <canvas id="myChart"></canvas>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
+<%= javascript_include_tag 'universitys/show' %>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        init_university_show();
+    });
+</script>

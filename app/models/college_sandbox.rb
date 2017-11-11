@@ -1,0 +1,2 @@
+class CollegeSandbox < ApplicationRecord
+end

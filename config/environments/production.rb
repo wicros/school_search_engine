@@ -14,6 +14,8 @@ Rails.application.configure do
   config.consider_all_requests_local       = false
   config.action_controller.perform_caching = true
 
+  config.action_mailer.default_url_options = { host: 'search.52japan.com'}
+
   # Attempt to read encrypted secrets from `config/secrets.yml.enc`.
   # Requires an encryption key in `ENV["RAILS_MASTER_KEY"]` or
   # `config/secrets.yml.key`.
@@ -88,4 +90,14 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  config.action_mailer.delivery_method =:smtp
+  config.action_mailer.smtp_settings = {
+    :address=> "smtp.live.com",
+    :port=> 25,
+    :domain=> "linc-info.com",
+    :authentication=> :login,
+    :user_name=> "support@linc-info.com",
+    :password=> "Darksoul1201"
+  }
 end

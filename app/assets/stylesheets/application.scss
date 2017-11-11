@@ -10,7 +10,77 @@
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
  *
- *= require_tree .
  *= require_self
  */
 @import "bootstrap";
+@import "font-awesome-sprockets";
+@import "font-awesome";
+
+.title{
+  text-decoration: none;
+  color: rgba(54, 162, 235, 1);
+  font-weight: bold;
+}
+
+.container{
+  min-height: 600px;
+}
+
+.bd-callout {
+  padding: 1.25rem;
+  margin-top: 1.25rem;
+  margin-bottom: 1.25rem;
+  border: 1px solid #eee;
+  border-left-width: .25rem;
+  border-radius: .25rem;
+}
+
+.bd-callout-yellow {
+  border-left-color:rgba(255, 206, 86, 1);
+}
+
+.bd-callout-blue {
+  border-left-color: rgba(54, 162, 235, 1);
+}
+
+.bd-callout-red {
+  border-left-color: rgba(255, 99, 132, 1);
+}
+
+.bd-callout-green {
+  border-left-color: rgba(75, 192, 192, 1);
+}
+
+.bd-callout-purple {
+  border-left-color: rgba(153, 102, 255, 1);
+}
+
+.bd-callout-orange {
+  border-left-color: rgba(255, 159, 64, 1);
+}
+
+.color-yellow{
+  color:rgba(255, 206, 86, 1);
+}
+
+.color-blue{
+  color:rgba(54, 162, 235, 1);
+}
+
+.color-red{
+  color:rgba(255, 99, 132, 1);
+}
+
+.color-green{
+  color:rgba(75, 192, 192, 1);
+}
+
+.color-purple{
+  color:rgba(153, 102, 255, 1);
+}
+
+.color-orange{
+  color:rgba(255, 159, 64, 1);
+}
+
+

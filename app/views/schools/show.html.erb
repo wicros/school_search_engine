@@ -1,0 +1,97 @@
+<div class="container">
+  <h2 style="margin: 30px;text-align: center"><%= @school.name%></h2>
+  <div class="bd-callout bd-callout-blue">
+    <h4 style="margin-bottom: 10px;text-align: center" class="color-blue">基本情报</h4>
+    <div class="row">
+      <div class="col-8">
+          <table border="0" cellpadding="0" cellspacing="0">
+            <tr>
+              <td><i class="fa fa-phone space-name color-blue"><span>电话号码:</span></i><%= @school.tel%></td>
+              <td><i class="fa fa-fax space-name color-blue"><span>FAX:</span></i><%= @school.fax%></td>
+            </tr>
+            <tr>
+              <td><i class="fa fa-envelope space-name color-blue"><span>E-Mail:</span></i><%= @school.email%></td>
+              <td><i class="fa fa-mail-forward space-name color-blue"><span>邮政编码:</span></i><%= @school.zip_code%></td>
+            </tr>
+            <tr>
+              <td colspan="2"><i class="fa fa-map-marker space-name color-blue"><span>地址:</span></i><%= @school.address%></td>
+            </tr>
+            <tr>
+              <td colspan="2"><i class="fa fa-map space-name color-blue"><span>向导:</span></i><%= @school.direction%></td>
+            </tr>
+            <tr>
+              <td colspan="2"><i class="fa fa-mouse-pointer space-name color-blue"><span>学校主页:</span></i>
+                <a href="<%= @school.home_page%>" target="_blank"><%= @school.home_page%></a></td>
+            </tr>
+            <tr><td colspan="2"></td></tr> <tr><td colspan="2"></td></tr>
+            <tr>
+              <td><i class="fa fa-flag space-name color-blue"><span>成立方:</span></i><%= @school.establisher%></td>
+              <td><i class="fa fa-address-card space-name color-blue"><span>法人:</span></i><%= @school.representative%></td>
+            </tr>
+            <tr>
+              <td><i class="fa fa-university space-name color-blue"><span>校长:</span></i><%= @school.principal%></td>
+              <td><i class="fa fa-history space-name color-blue"><span>开办时间:</span></i><%= @school.start_date%></td>
+            </tr>
+            <tr>
+              <td><i class="fa fa-user space-name color-blue"><span>教员数:</span></i><%= @school.teacher_mun%></td>
+              <td><i class="fa fa-users space-name color-blue"><span>容纳学生数:</span></i><%= @school.capacity%></td>
+            </tr>
+            <tr>
+              <td><i class="fa fa-reorder space-name color-blue"><span>入学资格:</span></i><%= @school.admission%></td>
+              <td><i class="fa fa-search space-name color-blue"><span>入学审查:</span></i><%= @school.selection%></td>
+            </tr>
+          </table>
+      </div>
+      <div class="col-4">
+        <img src="<%= @school.img_url%>" class="rounded img-thumbnail"/>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <div id="google_map"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="bd-callout bd-callout-green">
+    <h4 style="margin-bottom: 10px;text-align: center" class="color-green">详细情报</h4>
+    <div class="row">
+      <div class="col-12">
+        <i class="fa fa-info space-name color-green"><span>学校简介:</span></i><%= @school.description%>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12" id="course_div"></div>
+    </div>
+    <div class="row">
+      <div class="col-12" id="student_div"></div>
+    </div>
+  </div>
+
+  <div class="bd-callout bd-callout-orange">
+    <h4 style="margin-bottom: 10px;text-align: center" class="color-orange">学校实绩</h4>
+    <div class="row">
+      <div class="col-12" id="jpt_div" data-id="<%= @school.id%>" data-la="<%= @school.latitude%>" data-lo="<%= @school.longitude%>"></div>
+    </div>
+    <!--<div class="row">-->
+      <!--<div class="col-12" id="eju_div"></div>-->
+    <!--</div>-->
+    <div class="row">
+      <div class="col-12" id="graduate_div"></div>
+    </div>
+  </div>
+
+</div>
+<%= stylesheet_link_tag 'schools',media:'all' %>
+<%= javascript_include_tag 'schools/show' %>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCUhJPrs97p0rUTWSwB9Pu0dtQ-3AcN4t0&callback=init_map"
+        type="text/javascript"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        if ($('#jpt_div').attr('data-id')) {
+            init_school_show();
+        }
+    });
+</script>
+

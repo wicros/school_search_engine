@@ -1,0 +1,2 @@
+class CollegeScore < ApplicationRecord
+end

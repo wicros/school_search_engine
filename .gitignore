@@ -20,8 +20,10 @@ config/database.yml
 config/credentials.yml
 config/deploy*.rb
 config/secrets.yml
+.idea
 .DS_Store
 .ruby-version
 .ruby-gemset
 .env
 .byebug_history
+/db/schema.rb

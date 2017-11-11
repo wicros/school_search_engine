@@ -1,0 +1,22 @@
+<div class="container">
+  <div>
+    <input type="text" id="search_text" style="margin-left: 30px"/>
+    <button class="btn btn-primary" id="bt_search" style="margin-left: 30px">搜索</button>
+    <select id="search_select" style="margin-left: 30px">
+      <option value="">all</option>
+      <% @prefecture.each do |item| %>
+        <option value="<%= item.id %>"><%= item.name %></option>
+      <% end %>
+    </select>
+  </div>
+
+  <div id="card_container" class="card-deck" style="width: 100%;padding: 20px"></div>
+</div>
+
+<%= stylesheet_link_tag 'schools', media: 'all' %>
+<%= javascript_include_tag 'schools/index' %>
+<script type="text/javascript">
+    $(document).ready(function () {
+        init_school_home();
+    });
+</script>
