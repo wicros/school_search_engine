@@ -4,6 +4,7 @@ class School < ApplicationRecord
   has_many :jpt_results, dependent: :destroy
   has_many :eju_results, dependent: :destroy
   has_many :graduate_results, dependent: :destroy
+  has_many :comments
 
   belongs_to :prefecture
 

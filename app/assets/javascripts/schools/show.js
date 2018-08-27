@@ -7,6 +7,7 @@ function init_school_show() {
             init_graduate(JSON.parse(response.graduate_results));
             init_course(JSON.parse(response.courses));
             init_students(JSON.parse(response.students));
+            init_chart();
         },
         error:function(response){
             console.log("get show data error");
@@ -80,7 +81,7 @@ function init_course(courses) {
 }
 
 function init_graduate(graduate_results) {
-  var content = '<div style="text-align: center"><i class="fa fa-dot-circle-o space-name color-orange"><span>　升学成绩</span></i></div>';
+  var content = '<div style="text-align: center"><i class="fa fa-dot-circle-o space-name color-blue"><span>　升学成绩</span></i></div>';
   content = content + '<table class="table table-bordered">'+
       '<tr>\n' +
       '<th style="text-align: center">日期</th>\n' +
@@ -111,7 +112,7 @@ function init_graduate(graduate_results) {
 }
 
 function init_eju(eju_results) {
-    var content = '<div style="text-align: center"><i class="fa fa-dot-circle-o space-name color-orange"><span>　日本留学試験(EJU) 受験状況</span></i></div>';
+    var content = '<div style="text-align: center"><i class="fa fa-dot-circle-o space-name color-blue"><span>　日本留学試験(EJU) 受験状況</span></i></div>';
     content = content + '<table class="table table-bordered">';
     content = content + '<tr>\n' +
         '<td colspan="2" style="text-align: center"></td>\n' +
@@ -163,7 +164,7 @@ function init_jpt(jpt_results) {
       if(jpt_results && jpt_results[0] && jpt_results[0].date){
           date = jpt_results[0].date.substring(0,4);
       }
-  var content = '<div style="text-align: center"><i class="fa fa-dot-circle-o space-name color-orange"><span>　'+date+'年度　日本語能力試験 受験状況（第1回、第2回試験合計）</span></i></div>';
+  var content = '<div style="text-align: center"><i class="fa fa-dot-circle-o space-name color-blue"><span>　'+date+'年度　日本語能力試験 受験状況（第1回、第2回試験合計）</span></i></div>';
   content = content + '<table class="table table-bordered">';
   content = content + '<tr>\n' +
         '        <th></th>\n' +
@@ -216,4 +217,43 @@ function init_map() {
         position: uluru,
         map: map
     });
+}
+
+function init_chart() {
+  var location_score =  $('#commentChart').attr('data-location-score');
+  var environment_score =  $('#commentChart').attr('data-environment-score');
+  var service_score =  $('#commentChart').attr('data-service-score');
+  var progression_score =  $('#commentChart').attr('data-progression-score');
+  var teaching_score =  $('#commentChart').attr('data-teaching-score');
+  var fee_score =  $('#commentChart').attr('data-fee-score');
+
+  var ctx = document.getElementById('commentChart').getContext('2d');
+  chart = new Chart(ctx, {
+    type: 'radar',
+    data: {
+      labels: ['地理位置', '教学环境', '学校服务', '升学情况', '教学质量', '学费费用'],
+      datasets: [{
+        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+        borderColor: 'rgba(75, 192, 192, 1)',
+        pointBorderColor: 'rgba(75, 192, 192, 1)',
+        pointBackgroundColor: 'rgba(75, 192, 192, 1)',
+        data: [location_score, environment_score, service_score, progression_score, teaching_score, fee_score]
+      }]
+    },
+    options: {
+      scale: {
+        ticks: {
+          suggestedMin: 0,
+          suggestedMax: 5
+        }
+      },
+      legend: {
+        display: false,
+        labels: {
+          fontColor: 'rgb(255, 99, 132)'
+        }
+      }
+    }
+  });
+
 }

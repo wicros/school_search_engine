@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180318082058) do
+ActiveRecord::Schema.define(version: 20180823080021) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -77,6 +77,20 @@ ActiveRecord::Schema.define(version: 20180318082058) do
     t.index ["name"], name: "index_college_scores_on_name"
   end
 
+  create_table "comments", force: :cascade do |t|
+    t.bigint "school_id", null: false
+    t.bigint "user_id"
+    t.integer "location_score", default: 0
+    t.integer "environment_score", default: 0
+    t.integer "service_score", default: 0
+    t.integer "progression_score", default: 0
+    t.integer "teaching_score", default: 0
+    t.integer "fee_score", default: 0
+    t.string "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "courses", force: :cascade do |t|
     t.integer "school_id"
     t.string "name"
@@ -122,6 +136,16 @@ ActiveRecord::Schema.define(version: 20180318082058) do
     t.integer "graduate_num"
     t.index ["date"], name: "index_graduate_results_on_date"
     t.index ["school_id"], name: "index_graduate_results_on_school_id"
+  end
+
+  create_table "jpstudyexpress_public_subjects", id: false, force: :cascade do |t|
+    t.text "c1"
+    t.text "c2"
+    t.text "c3"
+    t.text "c4"
+    t.text "c5"
+    t.text "c6"
+    t.text "c7"
   end
 
   create_table "jpt_levels", force: :cascade do |t|
