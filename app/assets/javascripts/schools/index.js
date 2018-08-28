@@ -26,7 +26,7 @@ function init_cards(school_data) {
     var content='';
     $.each(school_data,function(i,school_item){
          content = content + '<div class="card text-center" style="min-width: 25%;max-width: 30%">\n' +
-                             '  <img class="school-image card-img-top" src="http://18.179.9.62/'+school_item.img_url+'" alt="school image">\n' +
+                             '  <img class="school-image card-img-top" src="'+school_item.img_url_file_name+'" alt="school image">\n' +
                              '  <div class="card-body">\n' +
                              '    <h4 class="card-title">'+school_item.name+'</h4>\n' +
                              '    <p class="card-text">'+school_item.description+'</p>\n' +

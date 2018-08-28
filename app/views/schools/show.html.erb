@@ -50,7 +50,7 @@
         </table>
       </div>
       <div class="col-4">
-        <img src="<%= @school.img_url %>" class="rounded img-thumbnail"/>
+        <img src="<%= @school.img_url_file_name %>" class="rounded img-thumbnail"/>
       </div>
     </div>
     <div class="row">
@@ -63,14 +63,14 @@
   <div class="bd-callout bd-callout-orange">
     <h4 style="margin-bottom: 10px;text-align: center" class="color-orange">学生评论</h4>
 
-    <div class="row" style="width: 500px">
+    <div class="row" style="width: 800px">
       <canvas id="commentChart"
-              data-location-score="<%= @school.comments.average(:location_score) %>"
-              data-environment-score="<%= @school.comments.average(:environment_score) %>"
-              data-service-score="<%= @school.comments.average(:service_score) %>"
-              data-progression-score="<%= @school.comments.average(:progression_score) %>"
-              data-teaching-score="<%= @school.comments.average(:teaching_score) %>"
-              data-fee-score="<%= @school.comments.average(:fee_score) %>"
+              data-location-score="<%= @school.comments.average(:location_score).round(2) %>"
+              data-environment-score="<%= @school.comments.average(:environment_score).round(2) %>"
+              data-service-score="<%= @school.comments.average(:service_score).round(2) %>"
+              data-progression-score="<%= @school.comments.average(:progression_score).round(2) %>"
+              data-teaching-score="<%= @school.comments.average(:teaching_score).round(2) %>"
+              data-fee-score="<%= @school.comments.average(:fee_score).round(2) %>"
       ></canvas>
     </div>
 

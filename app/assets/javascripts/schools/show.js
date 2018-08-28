@@ -229,29 +229,39 @@ function init_chart() {
 
   var ctx = document.getElementById('commentChart').getContext('2d');
   chart = new Chart(ctx, {
-    type: 'radar',
+    type: 'horizontalBar',
     data: {
       labels: ['地理位置', '教学环境', '学校服务', '升学情况', '教学质量', '学费费用'],
       datasets: [{
-        backgroundColor: 'rgba(75, 192, 192, 0.2)',
-        borderColor: 'rgba(75, 192, 192, 1)',
-        pointBorderColor: 'rgba(75, 192, 192, 1)',
-        pointBackgroundColor: 'rgba(75, 192, 192, 1)',
+        label: '分数',
+        backgroundColor: [
+          'rgba(255, 99, 132, 0.5)',
+          'rgba(54, 162, 235, 0.5)',
+          'rgba(255, 206, 86, 0.5)',
+          'rgba(75, 192, 192, 0.5)',
+          'rgba(153, 102, 255, 0.5)',
+          'rgba(255, 159, 64, 0.5)'
+        ],
+        borderColor: [
+          'rgba(255,99,132,1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(153, 102, 255, 1)',
+          'rgba(255, 159, 64, 1)'
+        ],
+        borderWidth: 0,
         data: [location_score, environment_score, service_score, progression_score, teaching_score, fee_score]
       }]
     },
     options: {
-      scale: {
-        ticks: {
-          suggestedMin: 0,
-          suggestedMax: 5
-        }
-      },
-      legend: {
-        display: false,
-        labels: {
-          fontColor: 'rgb(255, 99, 132)'
-        }
+      scales: {
+        xAxes: [{
+          ticks: {
+            beginAtZero:true,
+            suggestedMax: 5
+          }
+        }]
       }
     }
   });
