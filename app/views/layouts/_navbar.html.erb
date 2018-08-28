@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand col-2" href="/" style="text-decoration: none;font-weight: bold">日留查询通</a>
+  <a class="navbar-brand col-2" href="/" style="text-decoration: none;font-weight: bold">日语学校点评网</a>
   <div class="col-4"></div>
   <!--<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">-->
     <!--<span class="navbar-toggler-icon"></span>-->
@@ -23,17 +23,17 @@
         <!--</div>-->
       <!--</li>-->
     <!--</ul>-->
-    <ul class="navbar-nav ml-md-auto">
-      <li class="nav-item">
-        <% if user_signed_in? %>
-            你好 <%= current_user.email %>
-            <%= link_to "注销", destroy_user_session_path %>
-        <% else %>
-            <a  href="/users/sign_up" class="btn btn-warning" style="color: #fff;text-decoration: none;">　注册　</a>
-            <a  href="/users/sign_in" class="btn btn-outline-primary" style="text-decoration: none;">　登录　</a>
-        <% end %>
-      </li>
-    </ul>
+<!--    <ul class="navbar-nav ml-md-auto">-->
+<!--      <li class="nav-item">-->
+        <%# if user_signed_in? %>
+<!--            你好 <%#= current_user.email %>-->
+            <%#= link_to "注销", destroy_user_session_path %>
+        <%# else %>
+<!--            <a  href="/users/sign_up" class="btn btn-warning" style="color: #fff;text-decoration: none;">　注册　</a>-->
+<!--            <a  href="/users/sign_in" class="btn btn-outline-primary" style="text-decoration: none;">　登录　</a>-->
+        <%# end %>
+<!--      </li>-->
+<!--    </ul>-->
   </div>
 </nav>
 
