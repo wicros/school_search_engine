@@ -2,12 +2,12 @@ function init_school_show() {
     $.ajax({
         url: "/schools/show_data?id="+$('#jpt_div').attr('data-id'),
         success:function(response){
-            init_jpt(JSON.parse(response.jpt_results));
-            //init_eju(JSON.parse(response.eju_results));
-            init_graduate(JSON.parse(response.graduate_results));
-            init_course(JSON.parse(response.courses));
-            init_students(JSON.parse(response.students));
-            init_chart();
+          init_jpt(response.jpt_results);
+          //init_eju(response.eju_results);
+          init_graduate(response.graduate_results);
+          init_students(response.student_froms);
+          init_course(response.courses);
+          init_chart();
         },
         error:function(response){
             console.log("get show data error");

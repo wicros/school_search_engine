@@ -1,22 +1,25 @@
 <div class="container">
   <div>
-    <input type="text" id="search_text" style="margin-left: 30px"/>
-    <button class="btn btn-primary" id="bt_search" style="margin-left: 30px">搜索</button>
-    <select id="search_select" style="margin-left: 30px">
-      <option value="">all</option>
-      <% @prefecture.each do |item| %>
-        <option value="<%= item.id %>"><%= item.name %></option>
-      <% end %>
-    </select>
+    <%= form_tag("/schools", method: "get") do %>
+      <%= text_field_tag(:search_text) %>
+      <%= select_tag(:search_prefecture, options_for_select(@prefectures, @search_prefecture)) %>
+      <%= submit_tag("搜索", class: "btn btn-primary") %>
+    <% end %>
   </div>
 
-  <div id="card_container" class="card-deck" style="width: 100%;padding: 20px"></div>
+  <div id="card_container" class="card-deck" style="width: 100%;padding: 20px">
+    <% @schools.each do |school| %>
+      <div class="card text-center" style="min-width: 25%;max-width: 30%">
+        <img class="school-image card-img-top" src="<%= school.img_url_file_name %>" alt="school image">
+        <div class="card-body">
+          <h4 class="card-title"><%= school.name %></h4>
+          <p class="card-text"><%= school.description %></p>
+          <a href="/schools/<%= school.id %>" class="btn btn-primary"
+             style="text-decoration: none;color: #fff;cursor: pointer">学校详情</a>
+        </div>
+      </div>
+    <% end %>
+  </div>
 </div>
 
 <%= stylesheet_link_tag 'schools', media: 'all' %>
-<%= javascript_include_tag 'schools/index' %>
-<script type="text/javascript">
-    $(document).ready(function () {
-        init_school_home();
-    });
-</script>

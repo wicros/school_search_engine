@@ -1,23 +1,25 @@
 <div class="container">
+
   <div class="row" style="padding: 20px">
-    <input type="text" id="search_text" style="margin-left: 30px"/>
-    <select id="search_select" style="margin-left: 30px">
-      <option value="0">大学名检索</option>
-      <option value="1">学部名检索</option>
-    </select>
-    <button class="btn btn-primary" id="bt_search" style="margin-left: 30px">搜索</button>
-  </div>
-  <div class="row">
-    <div id="card_container" class="card-deck" style="padding: 20px"></div>
+    <%= form_tag("/universitys", method: "get") do %>
+      <%= text_field_tag(:search_text) %>
+      <%= select_tag(:search_type, options_for_select([['大学名检索', 0], ['学部名检索', 1]], @search_type.to_i)) %>
+      <%= submit_tag("搜索", class: "btn btn-primary") %>
+    <% end %>
   </div>
 
+  <div class="row">
+    <div id="card_container" class="card-deck" style="padding: 20px">
+      <% @universities.each do |university| %>
+        <div class="card text-center" style="min-width: 15%;margin: 10px">
+          <div class="card-body">
+            <a href="/universitys/<%= university.id %>?search_type=<%= @search_type %>"
+               class="card-title" style="text-decoration: none;cursor: pointer"><%= university.name %></a>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
 
 </div>
 
-<%= javascript_include_tag 'universitys/index' %>
-
-<script type="text/javascript">
-    $(document).ready(function () {
-        init_university_index();
-    });
-</script>
