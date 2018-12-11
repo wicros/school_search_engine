@@ -1,135 +1,244 @@
 <div class="container">
   <h2 style="margin: 30px;text-align: center"><%= @school.name %></h2>
-  <div class="bd-callout bd-callout-blue">
-    <h4 style="margin-bottom: 10px;text-align: center" class="color-blue">基本情报</h4>
-    <div class="row">
-      <div class="col-8">
-        <table border="0" cellpadding="0" cellspacing="0">
-          <tr>
-            <td><i class="fa fa-phone space-name color-blue"><span>电话号码:</span></i><%= @school.tel %></td>
-            <td><i class="fa fa-fax space-name color-blue"><span>FAX:</span></i><%= @school.fax %></td>
+  <nav>
+    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+      <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">
+        <h4 style="margin-bottom: 10px;text-align: center" class="color-blue">基本情报</h4>
+      </a>
+      <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">
+        <h4 style="margin-bottom: 10px;text-align: center" class="color-orange">学生评论</h4>
+      </a>
+      <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">
+        <h4 style="margin-bottom: 10px;text-align: center" class="color-green">详细情报</h4>
+      </a>
+      <a class="nav-item nav-link" id="nav-result-tab" data-toggle="tab" href="#nav-result" role="tab" aria-controls="nav-result" aria-selected="false">
+        <h4 style="margin-bottom: 10px;text-align: center" class="color-purple">学校实绩</h4>
+      </a>
+    </div>
+  </nav>
+  <div class="tab-content" id="nav-tabContent">
+    <div class="tab-pane fade show active bd-callout bd-callout-blue" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+      <div class="row">
+        <div class="col-8">
+          <table border="0" cellpadding="0" cellspacing="0">
+            <tr>
+              <td><i class="fa fa-phone space-name color-blue"><span>电话号码:</span></i><%= @school.tel %></td>
+              <td><i class="fa fa-fax space-name color-blue"><span>FAX:</span></i><%= @school.fax %></td>
+            </tr>
+            <tr>
+              <td><i class="fa fa-envelope space-name color-blue"><span>E-Mail:</span></i><%= @school.email %></td>
+              <td><i class="fa fa-mail-forward space-name color-blue"><span>邮政编码:</span></i><%= @school.zip_code %></td>
+            </tr>
+            <tr>
+              <td colspan="2">
+                <i class="fa fa-map-marker space-name color-blue"><span>地址:</span></i><%= @school.address %>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2"><i class="fa fa-map space-name color-blue"><span>向导:</span></i><%= @school.direction %>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2"><i class="fa fa-mouse-pointer space-name color-blue"><span>学校主页:</span></i>
+                <a href="<%= @school.home_page %>" target="_blank"><%= @school.home_page %></a></td>
+            </tr>
+            <tr>
+              <td colspan="2"></td>
+            </tr>
+            <tr>
+              <td colspan="2"></td>
+            </tr>
+            <tr>
+              <td><i class="fa fa-flag space-name color-blue"><span>成立方:</span></i><%= @school.establisher %></td>
+              <td><i class="fa fa-address-card space-name color-blue"><span>法人:</span></i><%= @school.representative %>
+              </td>
+            </tr>
+            <tr>
+              <td><i class="fa fa-university space-name color-blue"><span>校长:</span></i><%= @school.principal %></td>
+              <td><i class="fa fa-history space-name color-blue"><span>开办时间:</span></i><%= @school.start_date %></td>
+            </tr>
+            <tr>
+              <td><i class="fa fa-user space-name color-blue"><span>教员数:</span></i><%= @school.teacher_mun %></td>
+              <td><i class="fa fa-users space-name color-blue"><span>容纳学生数:</span></i><%= @school.capacity %></td>
+            </tr>
+            <tr>
+              <td><i class="fa fa-reorder space-name color-blue"><span>入学资格:</span></i><%= @school.admission %></td>
+              <td><i class="fa fa-search space-name color-blue"><span>入学审查:</span></i><%= @school.selection %></td>
+            </tr>
+          </table>
+        </div>
+        <div class="col-4">
+          <img src="<%= @school.img_url_file_name %>" class="rounded img-thumbnail"/>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <div id="google_map" data-la="<%= @school.latitude %>" data-lo="<%= @school.longitude %>"></div>
+        </div>
+      </div>
+
+    </div>
+    <div class="tab-pane fade bd-callout bd-callout-orange" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+
+      <div class="row" style="width: 800px">
+        <canvas id="commentChart"
+                data-location-score="<%= @school.comments.average(:location_score).round(2) %>"
+                data-environment-score="<%= @school.comments.average(:environment_score).round(2) %>"
+                data-service-score="<%= @school.comments.average(:service_score).round(2) %>"
+                data-progression-score="<%= @school.comments.average(:progression_score).round(2) %>"
+                data-teaching-score="<%= @school.comments.average(:teaching_score).round(2) %>"
+                data-fee-score="<%= @school.comments.average(:fee_score).round(2) %>"
+        ></canvas>
+      </div>
+
+      <% @school.comments.each do |comment| %>
+        <div style="border-radius: 5px; border: 1px solid #000;padding: 10px;margin-top: 20px">
+          <div>
+            <span class="color-orange">匿名用户</span>
+            <span style="margin-left: 50px;color: #999999"> <%= comment.created_at.to_s %></span>
+          </div>
+          <div class="color-blue" style="margin: 10px">
+            <span style="margin-right: 10px;">地理位置: <%= comment.location_score %></span>
+            <span style="margin-right: 10px;">教学环境: <%= comment.environment_score %></span>
+            <span style="margin-right: 10px;">学校服务: <%= comment.service_score %></span>
+            <span style="margin-right: 10px;">升学情况: <%= comment.progression_score %></span>
+            <span style="margin-right: 10px;">教学质量: <%= comment.teaching_score %></span>
+            <span style="margin-right: 10px;">学费费用: <%= comment.fee_score %></span>
+          </div>
+          <div style="margin: 15px"> <%= comment.content %></div>
+        </div>
+      <% end %>
+    </div>
+    <div class="tab-pane fade bd-callout bd-callout-green" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+
+      <div class="row" style="padding: 20px">
+        <i class="fa fa-info space-name color-green" style="margin: 20px auto"><span>学校简介:</span></i>
+        <%= @school.description %>
+      </div>
+      <div class="row">
+        <i class="fa fa-square space-name color-green" style="margin: 20px auto"><span>　课程情报</span></i>
+        <table class="table table-bordered">
+          <th rowspan="2" style="text-align: center">课程名称</th>
+          <th rowspan="2" style="text-align: center">课程目的</th>
+          <th rowspan="2" style="text-align: center">修业时间</th>
+          <th rowspan="2" style="text-align: center">授课时数</th>
+          <th rowspan="2" style="text-align: center">授课周数</th>
+          <th rowspan="2" style="text-align: center">入学月份</th>
+          <th style="text-align: center" colspan="5">费用</th>
           </tr>
           <tr>
-            <td><i class="fa fa-envelope space-name color-blue"><span>E-Mail:</span></i><%= @school.email %></td>
-            <td><i class="fa fa-mail-forward space-name color-blue"><span>邮政编码:</span></i><%= @school.zip_code %></td>
+            <th style="text-align: center">报名费</th>
+            <th style="text-align: center">入学金</th>
+            <th style="text-align: center">学费</th>
+            <th style="text-align: center">其他</th>
+            <th style="text-align: center">合计</th>
+          </tr>
+          <% @school.courses.each do |course| %>
+            <tr>
+              <td style="text-align: center"><%= course.name %></td>
+              <td style="text-align: center"><%= course.purpose %></td>
+              <td style="text-align: center"><%= course.length %></td>
+              <td style="text-align: center"><%= course.hours %></td>
+              <td style="text-align: center"><%= course.weeks %></td>
+              <td style="text-align: center"><%= course.admission %></td>
+              <td style="text-align: center"><%= course.selection_fee %></td>
+              <td style="text-align: center"><%= course.admission_fee %></td>
+              <td style="text-align: center"><%= course.tuition %></td>
+              <td style="text-align: center"><%= course.other_fee %></td>
+              <td style="text-align: center"><%= (course.selection_fee + course.admission_fee + course.tuition + course.other_fee) %></td>
+            </tr>
+          <% end %>
+        </table>
+      </div>
+      <div class="row">
+        <i class="fa fa-square space-name color-green" style="margin: 20px auto"><span>　学生来源</span></i>
+        <table class="table table-bordered">
+          <tr>
+            <% @school.student_froms.each do |student_from| %>
+              <td style="text-align: center"><%= student_from.from %></td>
+            <% end %>
+            <td style="text-align: center">合计</td>
           </tr>
           <tr>
-            <td colspan="2"><i class="fa fa-map-marker space-name color-blue"><span>地址:</span></i><%= @school.address %>
-            </td>
-          </tr>
-          <tr>
-            <td colspan="2"><i class="fa fa-map space-name color-blue"><span>向导:</span></i><%= @school.direction %></td>
-          </tr>
-          <tr>
-            <td colspan="2"><i class="fa fa-mouse-pointer space-name color-blue"><span>学校主页:</span></i>
-              <a href="<%= @school.home_page %>" target="_blank"><%= @school.home_page %></a></td>
-          </tr>
-          <tr>
-            <td colspan="2"></td>
-          </tr>
-          <tr>
-            <td colspan="2"></td>
-          </tr>
-          <tr>
-            <td><i class="fa fa-flag space-name color-blue"><span>成立方:</span></i><%= @school.establisher %></td>
-            <td><i class="fa fa-address-card space-name color-blue"><span>法人:</span></i><%= @school.representative %>
-            </td>
-          </tr>
-          <tr>
-            <td><i class="fa fa-university space-name color-blue"><span>校长:</span></i><%= @school.principal %></td>
-            <td><i class="fa fa-history space-name color-blue"><span>开办时间:</span></i><%= @school.start_date %></td>
-          </tr>
-          <tr>
-            <td><i class="fa fa-user space-name color-blue"><span>教员数:</span></i><%= @school.teacher_mun %></td>
-            <td><i class="fa fa-users space-name color-blue"><span>容纳学生数:</span></i><%= @school.capacity %></td>
-          </tr>
-          <tr>
-            <td><i class="fa fa-reorder space-name color-blue"><span>入学资格:</span></i><%= @school.admission %></td>
-            <td><i class="fa fa-search space-name color-blue"><span>入学审查:</span></i><%= @school.selection %></td>
+            <% @school.student_froms.each do |student_from| %>
+              <td style="text-align: center"><%= student_from.num %></td>
+            <% end %>
+            <td style="text-align: center"><%= @school.student_froms.map(&:num).sum %></td>
           </tr>
         </table>
       </div>
-      <div class="col-4">
-        <img src="<%= @school.img_url_file_name %>" class="rounded img-thumbnail"/>
-      </div>
+
     </div>
-    <div class="row">
-      <div class="col-12">
-        <div id="google_map"></div>
+    <div class="tab-pane fade bd-callout bd-callout-purple" id="nav-result" role="tabpanel" aria-labelledby="nav-result-tab">
+
+      <div class="row">
+        <i class="fa fa-dot-circle-o space-name color-purple" style="margin: 20px auto">
+          <span><%= @school.jpt_results[0]&.date&.to_s[0, 4] %>年度　日本語能力試験 受験状況（第1回、第2回試験合計）</span>
+        </i>
+        <table class="table table-bordered">';
+          <tr>
+            <th></th>
+            <th style="text-align: center">N1</th>
+            <th style="text-align: center">N2</th>
+            <th style="text-align: center">N3</th>
+            <th style="text-align: center">N4</th>
+            <th style="text-align: center">N5</th>
+            <th style="text-align: center">合计</th>
+          </tr>
+          <tr>
+            <th style="text-align: center">参加人数</th>
+            <% (1..5).each do |i| %>
+              <% jpt_result = @school.jpt_results&.select {|j| j.level.to_i == i}.first %>
+              <td style="text-align: center"><%= jpt_result&.examinees || 0 %></td>
+            <% end %>
+            <td style="text-align: center"> <%= @school.jpt_results&.map(&:examinees).sum %></td>
+          </tr>
+          <tr>
+            <th style="text-align: center">合格人数</th>
+            <% (1..5).each do |i| %>
+              <% jpt_result = @school.jpt_results&.select {|j| j.level.to_i == i}.first %>
+              <td style="text-align: center"><%= jpt_result&.certified || 0 %></td>
+            <% end %>
+            <td style="text-align: center"> <%= @school.jpt_results&.map(&:certified).sum %></td>
+          </tr>
+        </table>
+
+      </div>
+
+      <div class="row" style="text-align: center">
+        <i class="fa fa-dot-circle-o space-name color-purple" style="margin: 20px auto"><span>升学成绩</span></i>
+        <table class="table table-bordered">
+          <tr>
+            <th style="text-align: center">日期</th>
+            <th style="text-align: center">毕业人数</th>
+            <th style="text-align: center">大学院</th>
+            <th style="text-align: center">大学</th>
+            <th style="text-align: center">短期大学</th>
+            <th style="text-align: center">高等専門学校</th>
+            <th style="text-align: center">専修学校</th>
+            <th style="text-align: center">各種学校</th>
+            <th style="text-align: center">その他</th>
+          </tr>
+          <% @school.graduate_results.each do |graduate_result| %>
+            <tr>
+              <td style="text-align: center"><%= graduate_result.date %></td>
+              <td style="text-align: center"><%= graduate_result.graduate_num %></td>
+              <td style="text-align: center"><%= graduate_result.graduate_school %></td>
+              <td style="text-align: center"><%= graduate_result.university %></td>
+              <td style="text-align: center"><%= graduate_result.junior_college %></td>
+              <td style="text-align: center"><%= graduate_result.technical_school %></td>
+              <td style="text-align: center"><%= graduate_result.special_training %></td>
+              <td style="text-align: center"><%= graduate_result.traning_school %></td>
+              <td style="text-align: center"><%= graduate_result.other %></td>
+            </tr>
+          <% end %>
+        </table>
       </div>
     </div>
   </div>
-
-  <div class="bd-callout bd-callout-orange">
-    <h4 style="margin-bottom: 10px;text-align: center" class="color-orange">学生评论</h4>
-
-    <div class="row" style="width: 800px">
-      <canvas id="commentChart"
-              data-location-score="<%= @school.comments.average(:location_score).round(2) %>"
-              data-environment-score="<%= @school.comments.average(:environment_score).round(2) %>"
-              data-service-score="<%= @school.comments.average(:service_score).round(2) %>"
-              data-progression-score="<%= @school.comments.average(:progression_score).round(2) %>"
-              data-teaching-score="<%= @school.comments.average(:teaching_score).round(2) %>"
-              data-fee-score="<%= @school.comments.average(:fee_score).round(2) %>"
-      ></canvas>
-    </div>
-
-    <% @school.comments.each do |comment| %>
-      <div style="border-radius: 5px; border: 1px solid #000;padding: 10px;margin-top: 20px">
-        <div>
-          <span class="color-orange">匿名用户</span>
-          <span style="margin-left: 50px;color: #999999"> <%= comment.created_at.to_s %></span>
-        </div>
-        <div class="color-blue" style="margin: 10px">
-          <span style="margin-right: 10px;">地理位置: <%= comment.location_score %></span>
-          <span style="margin-right: 10px;">教学环境: <%= comment.environment_score %></span>
-          <span style="margin-right: 10px;">学校服务: <%= comment.service_score %></span>
-          <span style="margin-right: 10px;">升学情况: <%= comment.progression_score %></span>
-          <span style="margin-right: 10px;">教学质量: <%= comment.teaching_score %></span>
-          <span style="margin-right: 10px;">学费费用: <%= comment.fee_score %></span>
-        </div>
-        <div style="margin: 15px"> <%= comment.content %></div>
-      </div>
-    <% end %>
-  </div>
-
-  <div class="bd-callout bd-callout-green">
-    <h4 style="margin-bottom: 10px;text-align: center" class="color-green">详细情报</h4>
-    <div class="row">
-      <div class="col-12">
-        <i class="fa fa-info space-name color-green"><span>学校简介:</span></i><%= @school.description %>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-12" id="course_div"></div>
-    </div>
-    <div class="row">
-      <div class="col-12" id="student_div"></div>
-    </div>
-  </div>
-
-  <div class="bd-callout bd-callout-blue">
-    <h4 style="margin-bottom: 10px;text-align: center" class="color-blue">学校实绩</h4>
-    <div class="row">
-      <div class="col-12" id="jpt_div" data-id="<%= @school.id %>" data-la="<%= @school.latitude %>" data-lo="<%= @school.longitude %>"></div>
-    </div>
-
-    <div class="row">
-      <div class="col-12" id="graduate_div"></div>
-    </div>
-  </div>
-
 </div>
-<%= stylesheet_link_tag 'schools', media: 'all' %>
-<%= javascript_include_tag 'schools/show' %>
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCUhJPrs97p0rUTWSwB9Pu0dtQ-3AcN4t0&callback=init_map"
-        type="text/javascript"></script>
-
-<script type="text/javascript">
-  $(document).ready(function () {
-    if ($('#jpt_div').attr('data-id')) {
-      init_school_show();
-    }
-  });
-</script>
+  <%= stylesheet_link_tag 'schools', media: 'all' %>
+  <%= javascript_include_tag 'schools/show' %>
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCUhJPrs97p0rUTWSwB9Pu0dtQ-3AcN4t0&callback=init_map"
+          type="text/javascript"></script>
 

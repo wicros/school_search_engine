@@ -7,12 +7,7 @@ class SchoolsController < ApplicationController
   end
 
   def show
-    @school = School.includes(:comments).find(params[:id])
+    @school = School.includes(:comments, :graduate_results, :jpt_results, :courses, :student_froms, :eju_results).find(params[:id])
   end
-
-  def show_data
-    render json: School.find(params[:id]).to_json(include: %i[graduate_results jpt_results courses student_froms eju_results])
-  end
-
 end
 
